@@ -1,0 +1,119 @@
+# Wireshark Cheatsheet
+
+Wireshark is a free and open-source packet analyzer that allows you to see what's happening on your network at a microscopic level. Here are some of the key features and commands that you need to know when working with Wireshark.
+
+## Key Features
+
+- **Capture and display packets**: Wireshark can capture and display packets from a wide range of network protocols, including Ethernet, Wi-Fi, Bluetooth, and many others.
+- **Powerful filtering**: Wireshark provides a powerful filtering system that allows you to focus on the packets that matter most to you.
+- **Live capture and offline analysis**: Wireshark can capture packets in real-time, as well as analyze packets that have been captured and saved to a file.
+- **Customizable views**: Wireshark allows you to customize the way packets are displayed, including the color scheme, layout, and more.
+
+## Basic Commands
+
+Here are some of the basic commands that you need to know when working with Wireshark:
+
+| Command                 | Description                                                                       |
+| ----------------------- | --------------------------------------------------------------------------------- |
+| `wireshark`             | Start Wireshark                                                                   |
+| `wireshark -k`          | Start Wireshark and immediately start capturing packets                           |
+| `wireshark -r <file>`   | Open a capture file for analysis                                                  |
+| `wireshark -f <filter>` | Start Wireshark and immediately start capturing packets with the specified filter |
+
+## Advanced Commands
+
+Here are some of the advanced commands that you can use when working with Wireshark:
+
+| Command                  | Description                                |
+| ------------------------ | ------------------------------------------ |
+| `tshark -i <interface>`  | Capture packets on the specified interface |
+| `tshark -D`              | List available capture interfaces          |
+| `tshark -r <file>`       | Analyze a capture file                     |
+| `tshark -V`              | Display packet details in verbose mode     |
+| `tshark -R <filter>`     | Apply a filter to the packets              |
+| `tshark -z <statistics>` | Generate statistics on captured packets    |
+
+## Additional Resources
+
+For more information on Wireshark and how to use it, check out the following resources:
+
+- [Wireshark User Guide](https://www.wireshark.org/docs/wsug_html/)
+- [Wireshark Tutorials](https://www.wireshark.org/docs/tutorial/)
+- [Wireshark Wiki](https://wiki.wireshark.org/)
+- [Wireshark Mailing Lists](https://www.wireshark.org/lists/)
+- [Wireshark Bug Tracker](https://bugs.wireshark.org/)
+
+
+# Wireshark Cheat Sheet
+
+This file provides a quick reference for using Wireshark in networking and cybersecurity labs. It focuses on commonly used capture options, display filters, shortcuts, and analysis features useful for students and beginners.
+
+## Capture Basics
+- Start capture: Ctrl + E
+- Stop capture: Ctrl + E
+- Restart capture: Ctrl + R
+- Save capture file: Ctrl + S
+- Select interface: Wi-Fi or Ethernet based on active connection
+
+## Common Display Filters
+- HTTP traffic:
+  http
+- HTTPS traffic:
+  tls
+- TCP traffic:
+  tcp
+- UDP traffic:
+  udp
+- ICMP (ping):
+  icmp
+- DNS traffic:
+  dns
+- Specific IP address:
+  ip.addr == 192.168.1.1
+- Source IP:
+  ip.src == 192.168.1.1
+- Destination IP:
+  ip.dst == 192.168.1.1
+- Specific port:
+  tcp.port == 80
+
+## Capture Filters (Before Capture)
+- Capture HTTP traffic:
+  port 80
+- Capture HTTPS traffic:
+  port 443
+- Capture traffic from specific host:
+  host 192.168.1.1
+
+## Packet Analysis
+- Follow TCP Stream:
+  Right-click packet → Follow → TCP Stream
+- View protocol layers:
+  Frame → Ethernet → IP → TCP/UDP → Application
+- Hex view:
+  Shows raw packet data
+
+## Statistics and Analysis
+- Protocol hierarchy:
+  Statistics → Protocol Hierarchy
+- Conversations:
+  Statistics → Conversations
+- Endpoints:
+  Statistics → Endpoints
+- Traffic graphs:
+  Statistics → IO Graphs
+
+## Useful Shortcuts
+- Find packet: Ctrl + F
+- Next packet: Ctrl + .
+- Previous packet: Ctrl + ,
+- Preferences: Ctrl + Shift + P
+
+## Common Use Cases
+- Network troubleshooting
+- Traffic analysis
+- Protocol learning
+- Cybersecurity and ethical hacking labs
+
+Note: Use Wireshark only on authorized networks for educational and ethical purposes.
+
